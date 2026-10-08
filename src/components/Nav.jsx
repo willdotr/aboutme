@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import AudioPlayer from './AudioPlayer.jsx'
 
 const links = [
   { id: 'about', label: 'About' },
@@ -25,13 +26,16 @@ export default function Nav({ name }) {
   return (
     <header className="nav">
       <a className="nav__brand" href="#about">{name}</a>
-      <nav aria-label="Primary">
-        {links.map(({ id, label }) => (
-          <a key={id} href={`#${id}`} className={active === id ? 'is-active' : ''}>
-            {label}
-          </a>
-        ))}
-      </nav>
+      <div className="nav__right">
+        <nav aria-label="Primary">
+          {links.map(({ id, label }) => (
+            <a key={id} href={`#${id}`} className={active === id ? 'is-active' : ''}>
+              {label}
+            </a>
+          ))}
+        </nav>
+        <AudioPlayer />
+      </div>
     </header>
   )
 }
