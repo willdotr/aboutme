@@ -148,3 +148,6 @@ vite.config.ts.timestamp-*
 .turbo
 
 .backup
+
+# Old default build dir (site builds to docs/)
+dist
