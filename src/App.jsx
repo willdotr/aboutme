@@ -1,4 +1,5 @@
 import Nav from './components/Nav.jsx'
+import EnterScreen from './components/EnterScreen.jsx'
 import Ransom from './components/Ransom.jsx'
 import Section from './components/Section.jsx'
 import { profile, work, skate, anime } from './data.js'
@@ -7,6 +8,7 @@ export default function App() {
   return (
     <>
       <div className="glow" aria-hidden="true" />
+      <EnterScreen name={profile.name} />
       <Nav name={profile.name} />
       <main>
         <Section id="about">

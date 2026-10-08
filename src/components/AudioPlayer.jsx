@@ -37,12 +37,16 @@ export default function AudioPlayer() {
     }
     const stop = () => events.forEach((ev) => window.removeEventListener(ev, start))
 
+    const onEnter = () => audio.play().catch(() => {})
+    window.addEventListener('site-enter', onEnter)
+
     audio.play().catch(() => {
       if (!cancelled) events.forEach((ev) => window.addEventListener(ev, start))
     })
     return () => {
       cancelled = true
       stop()
+      window.removeEventListener('site-enter', onEnter)
     }
   }, [])
 
@@ -59,7 +63,10 @@ export default function AudioPlayer() {
         src={SRC}
         loop
         preload="auto"
-        onPlay={() => setPlaying(true)}
+        onPlay={() => {
+          setPlaying(true)
+          window.dispatchEvent(new Event('site-audio-playing'))
+        }}
         onPause={() => setPlaying(false)}
       />
       <button type="button" onClick={toggle} aria-label={playing ? 'Pause music' : 'Play music'} className="audio__btn audio__btn--main">
